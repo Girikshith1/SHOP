@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <rect width="100" height="100" fill="#191919"/>
+  <text x="50" y="65" font-family="'Bebas Neue', Impact, sans-serif" font-size="52" fill="#EAEAEA" letter-spacing="4" text-anchor="middle" font-weight="900">DON</text>
+  <circle cx="85" cy="25" r="5" fill="#A72608"/>
+</svg>

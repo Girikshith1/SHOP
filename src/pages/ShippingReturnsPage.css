@@ -1,0 +1,118 @@
+.shipping-returns-page {
+  padding-bottom: 120px;
+}
+
+.shipping-hero-banner {
+  padding-top: clamp(80px, 12vw, 140px);
+  padding-bottom: clamp(40px, 6vw, 64px);
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.shipping-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(3.2rem, 8vw, 6.5rem);
+  letter-spacing: 0.05em;
+  color: var(--color-soft-grey);
+  line-height: 0.95;
+  margin: 12px 0 16px 0;
+}
+
+.shipping-hero-desc {
+  font-family: var(--font-editorial);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 620px;
+}
+
+.shipping-content-container {
+  padding-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.shipping-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .shipping-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ship-stat-box {
+  padding: 24px;
+  background-color: #161616;
+  border: 1px solid var(--border-hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  letter-spacing: 0.06em;
+  color: var(--color-soft-grey);
+}
+
+.stat-desc {
+  font-family: var(--font-editorial);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.policy-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-bottom: 1px solid var(--border-hairline);
+  padding-bottom: 36px;
+}
+
+.policy-heading {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  letter-spacing: 0.06em;
+  color: var(--color-soft-grey);
+}
+
+.policy-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.policy-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+.policy-table th,
+.policy-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border: 1px solid var(--border-hairline);
+}
+
+.policy-table th {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--color-soft-grey);
+}
+
+.policy-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 0;
+  list-style: none;
+}

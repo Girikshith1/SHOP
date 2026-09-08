@@ -1,0 +1,130 @@
+.contact-page {
+  padding-bottom: 120px;
+}
+
+.contact-hero-banner {
+  padding-top: clamp(80px, 12vw, 140px);
+  padding-bottom: clamp(40px, 6vw, 64px);
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.contact-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(3.2rem, 8vw, 6.8rem);
+  letter-spacing: 0.05em;
+  color: var(--color-soft-grey);
+  line-height: 0.92;
+  margin: 12px 0 16px 0;
+}
+
+.contact-hero-desc {
+  font-family: var(--font-editorial);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 620px;
+}
+
+.contact-body-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  padding-top: 48px;
+}
+
+@media (min-width: 992px) {
+  .contact-body-grid {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+  }
+}
+
+.contact-card,
+.contact-form-card {
+  padding: 36px;
+  background-color: #161616;
+  border: 1px solid var(--border-hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-row-item {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.contact-icon {
+  color: var(--color-burnt-red);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.c-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.c-val {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--color-soft-grey);
+  transition: color var(--transition-fast);
+}
+
+.c-val:hover {
+  color: var(--color-burnt-red);
+}
+
+.c-val-text {
+  font-family: var(--font-editorial);
+  font-size: 1rem;
+  color: var(--color-soft-grey);
+  display: block;
+}
+
+.c-subnote {
+  font-family: var(--font-editorial);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 4px;
+}
+
+.contact-form-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--color-soft-grey);
+}
+
+.contact-inputs-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-success-state {
+  text-align: center;
+  padding: 40px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-success-state h4 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--color-soft-grey);
+}
+
+.contact-success-state p {
+  font-family: var(--font-editorial);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}

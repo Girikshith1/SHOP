@@ -1,0 +1,90 @@
+.brand-intro-section {
+  padding-top: clamp(80px, 10vw, 140px);
+  padding-bottom: clamp(80px, 10vw, 140px);
+  border-top: 1px solid var(--border-hairline);
+  border-bottom: 1px solid var(--border-hairline);
+  position: relative;
+  overflow: hidden;
+}
+
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.intro-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.intro-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-hairline);
+}
+
+.intro-quote {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+}
+
+.quote-part {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 6.5vw, 5.8rem);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  color: var(--color-soft-grey);
+}
+
+.intro-footer-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-hairline);
+}
+
+@media (min-width: 768px) {
+  .intro-footer-row {
+    grid-template-columns: 2fr 1fr;
+    align-items: flex-end;
+  }
+}
+
+.intro-subtext {
+  font-family: var(--font-editorial);
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+.intro-signature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-family: var(--font-mono);
+}
+
+@media (min-width: 768px) {
+  .intro-signature {
+    align-items: flex-end;
+  }
+}
+
+.sig-brand {
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  color: var(--color-soft-grey);
+}
+
+.sig-loc {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--color-burnt-red);
+}

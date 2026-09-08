@@ -1,0 +1,112 @@
+.new-drop-page {
+  padding-bottom: 120px;
+}
+
+.drop-page-hero {
+  padding-top: clamp(80px, 10vw, 130px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+  border-bottom: 1px solid var(--border-hairline);
+  background: radial-gradient(circle at 80% 30%, rgba(167, 38, 8, 0.12) 0%, transparent 60%);
+}
+
+.drop-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-hairline);
+  padding: 6px 14px;
+  margin-bottom: 20px;
+}
+
+.drop-page-title {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 36px 0;
+  line-height: 0.9;
+}
+
+.drop-title-part1 {
+  font-family: var(--font-heading);
+  font-size: clamp(3.8rem, 10vw, 8.5rem);
+  letter-spacing: 0.04em;
+  color: var(--color-soft-grey);
+}
+
+.drop-title-part2 {
+  font-size: clamp(3rem, 8vw, 7rem);
+  letter-spacing: 0.03em;
+}
+
+.drop-meta-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-hairline);
+}
+
+@media (min-width: 992px) {
+  .drop-meta-columns {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.drop-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.meta-val {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: var(--color-soft-grey);
+}
+
+.drop-warning-strip {
+  background-color: rgba(167, 38, 8, 0.2);
+  border-bottom: 1px solid rgba(167, 38, 8, 0.4);
+  padding: 12px 0;
+}
+
+.warning-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: #fff;
+}
+
+.drop-grid-container {
+  padding-top: 48px;
+}
+
+.drop-grid-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-hairline);
+  margin-bottom: 32px;
+}
+
+.drop-grid-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
+  color: var(--color-soft-grey);
+}

@@ -1,0 +1,306 @@
+@import './variables.css';
+@import './reset.css';
+@import './typography.css';
+@import './animations.css';
+
+/* ============================================================
+   GLOBAL LAYOUT & CORE UTILITIES
+   ============================================================ */
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-almost-black);
+}
+
+.main-content {
+  flex: 1 0 auto;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    padding-left: var(--space-12);
+    padding-right: var(--space-12);
+  }
+}
+
+.container-editorial {
+  width: 100%;
+  max-width: var(--container-editorial);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+.container-reading {
+  width: 100%;
+  max-width: var(--container-reading);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+/* Sections */
+.section {
+  padding-top: clamp(64px, 8vw, 128px);
+  padding-bottom: clamp(64px, 8vw, 128px);
+  position: relative;
+}
+
+.section-tight {
+  padding-top: clamp(48px, 5vw, 80px);
+  padding-bottom: clamp(48px, 5vw, 80px);
+}
+
+/* Section Backgrounds */
+.bg-almost-black {
+  background-color: var(--color-almost-black);
+  color: var(--color-soft-grey);
+}
+
+.bg-deep-teal {
+  background-color: var(--color-deep-teal);
+  color: var(--color-soft-grey);
+}
+
+.bg-soft-grey {
+  background-color: var(--color-soft-grey);
+  color: var(--color-almost-black);
+}
+
+.bg-olive-green {
+  background-color: var(--color-olive-green);
+  color: var(--color-soft-grey);
+}
+
+.bg-burnt-red {
+  background-color: var(--color-burnt-red);
+  color: var(--color-soft-grey);
+}
+
+/* Button Component Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  padding: 14px 28px;
+  border-radius: var(--radius-xs);
+  transition: all var(--transition-smooth);
+  text-decoration: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--color-burnt-red);
+  color: var(--color-soft-grey);
+  border-color: var(--color-burnt-red);
+}
+
+.btn-primary:hover {
+  background-color: #8c2006;
+  border-color: #8c2006;
+  transform: translateY(-1px);
+}
+
+.btn-dark {
+  background-color: var(--color-almost-black);
+  color: var(--color-soft-grey);
+  border-color: var(--color-almost-black);
+}
+
+.btn-dark:hover {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.btn-light {
+  background-color: var(--color-soft-grey);
+  color: var(--color-almost-black);
+  border-color: var(--color-soft-grey);
+}
+
+.btn-light:hover {
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+
+.btn-outline-light {
+  background-color: transparent;
+  color: var(--color-soft-grey);
+  border-color: var(--border-medium);
+}
+
+.btn-outline-light:hover {
+  border-color: var(--color-soft-grey);
+  background-color: rgba(234, 234, 234, 0.08);
+}
+
+.btn-outline-dark {
+  background-color: transparent;
+  color: var(--color-almost-black);
+  border-color: var(--border-dark);
+}
+
+.btn-outline-dark:hover {
+  border-color: var(--color-almost-black);
+  background-color: rgba(25, 25, 25, 0.06);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.95rem;
+}
+
+.btn-lg {
+  padding: 18px 40px;
+  font-size: 1.35rem;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* Badges & Tags */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius-xs);
+  text-transform: uppercase;
+}
+
+.badge-red {
+  background-color: var(--color-burnt-red);
+  color: #fff;
+}
+
+.badge-teal {
+  background-color: var(--color-deep-teal);
+  color: var(--color-soft-grey);
+}
+
+.badge-olive {
+  background-color: var(--color-olive-green);
+  color: #fff;
+}
+
+.badge-outline {
+  border: 1px solid var(--border-medium);
+  color: var(--color-soft-grey);
+}
+
+/* Grids */
+.grid-products-4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .grid-products-4 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid-products-4 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+/* Forms & Inputs */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.form-label {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.form-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-hairline);
+  color: var(--color-soft-grey);
+  padding: 14px 16px;
+  font-size: 1rem;
+  border-radius: var(--radius-xs);
+  transition: border-color var(--transition-fast);
+}
+
+.form-input:focus {
+  border-color: var(--color-burnt-red);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.form-input-light {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #191919;
+}
+
+.form-input-light:focus {
+  border-color: #191919;
+}
+
+/* Modals & Backdrops */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+/* Hairline Dividers */
+.divider {
+  height: 1px;
+  background-color: var(--border-hairline);
+  width: 100%;
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.divider-light {
+  background-color: rgba(25, 25, 25, 0.15);
+}

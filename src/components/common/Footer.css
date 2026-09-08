@@ -1,0 +1,224 @@
+.site-footer {
+  border-top: 1px solid var(--border-hairline);
+  padding-top: clamp(64px, 8vw, 120px);
+  padding-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1100px) {
+  .footer-grid {
+    grid-template-columns: 2.2fr 1fr 1fr 1fr 1.2fr;
+    gap: 56px;
+  }
+}
+
+.footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: baseline;
+}
+
+.footer-logo .logo-text {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  letter-spacing: 0.14em;
+  color: var(--color-soft-grey);
+}
+
+.footer-logo .logo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-burnt-red);
+  margin-left: 6px;
+}
+
+.footer-manifesto {
+  font-family: var(--font-editorial);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 380px;
+}
+
+.footer-showroom-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.footer-social-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--color-soft-grey);
+  border: 1px solid var(--border-hairline);
+  padding: 8px 14px;
+  border-radius: var(--radius-xs);
+  transition: all var(--transition-fast);
+}
+
+.social-btn:hover {
+  border-color: var(--color-soft-grey);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.footer-heading {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  color: var(--color-soft-grey);
+  border-bottom: 1px solid var(--border-hairline);
+  padding-bottom: 8px;
+}
+
+.footer-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-link-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-editorial);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.footer-link-item:hover {
+  color: #ffffff;
+}
+
+.footer-link-item .link-arrow {
+  opacity: 0;
+  transform: translate(-3px, 3px);
+  transition: all var(--transition-fast);
+}
+
+.footer-link-item:hover .link-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+  color: var(--color-burnt-red);
+}
+
+.footer-protocol-text {
+  font-family: var(--font-editorial);
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.currency-selector {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.currency-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-hairline);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-soft-grey);
+  width: fit-content;
+}
+
+.active-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #22c55e;
+  border-radius: 50%;
+}
+
+/* Watermark */
+.footer-watermark-container {
+  margin-top: clamp(40px, 6vw, 80px);
+  margin-bottom: clamp(20px, 4vw, 40px);
+  overflow: hidden;
+  user-select: none;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-watermark {
+  font-family: var(--font-heading);
+  font-size: clamp(6rem, 24vw, 22rem);
+  line-height: 0.75;
+  letter-spacing: 0.08em;
+  color: rgba(234, 234, 234, 0.035);
+  white-space: nowrap;
+}
+
+/* Bottom Bar */
+.footer-bottom-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-hairline);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+@media (min-width: 768px) {
+  .footer-bottom-bar {
+    flex-direction: row;
+  }
+}

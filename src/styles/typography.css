@@ -1,0 +1,99 @@
+/* ============================================================
+   TYPOGRAPHY SYSTEM & HIERARCHY
+   1. BEBAS NEUE: Bold, Tall, Confident, Streetwear
+   2. CLIMATE CRISIS: Artistic, Rebellious, Selective
+   3. VOLLKORN: Editorial, Luxury, Storytelling
+   ============================================================ */
+
+/* Bebas Neue: Primary Heading & Structural Typography */
+.font-heading,
+h1, h2, h3, h4, h5, h6,
+.btn-text,
+.nav-link,
+.badge-text,
+.product-title,
+.price-tag,
+.category-title {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 0.95;
+  font-weight: 400;
+}
+
+/* Climate Crisis: Artistic Personality & Campaign Moments */
+.font-artistic,
+.campaign-headline,
+.drop-statement,
+.artistic-word {
+  font-family: var(--font-artistic);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 0.92;
+}
+
+/* Vollkorn: Editorial Luxury & Storytelling */
+.font-editorial,
+p,
+.product-description,
+.brand-narrative,
+.editorial-quote,
+.spec-list,
+.legal-text {
+  font-family: var(--font-editorial);
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+/* Fluid Typography Scales */
+.hero-title-giant {
+  font-size: clamp(3.5rem, 12vw, 10.5rem);
+  line-height: 0.88;
+  letter-spacing: 0.02em;
+}
+
+.hero-sub-artistic {
+  font-size: clamp(2.8rem, 8.5vw, 7.5rem);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  color: var(--color-soft-grey);
+}
+
+.section-title-large {
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: 0.05em;
+}
+
+.section-title-medium {
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: 0.95;
+  letter-spacing: 0.05em;
+}
+
+.editorial-statement {
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+}
+
+.card-title {
+  font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+  letter-spacing: 0.05em;
+}
+
+.mono-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Contrast Typography Classes */
+.text-almost-black { color: var(--color-almost-black); }
+.text-deep-teal { color: var(--color-deep-teal); }
+.text-soft-grey { color: var(--color-soft-grey); }
+.text-olive-green { color: var(--color-olive-green); }
+.text-burnt-red { color: var(--color-burnt-red); }
+.text-muted { color: var(--text-muted); }
+.text-secondary { color: var(--text-secondary); }

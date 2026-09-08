@@ -1,0 +1,233 @@
+.shop-page {
+  padding-bottom: 120px;
+}
+
+.shop-header-banner {
+  padding-top: clamp(60px, 8vw, 100px);
+  padding-bottom: clamp(36px, 5vw, 60px);
+  border-bottom: 1px solid var(--border-hairline);
+  background: linear-gradient(to bottom, #191919 0%, #151515 100%);
+}
+
+.shop-title-lockup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shop-main-title {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 7.5vw, 6.5rem);
+  letter-spacing: 0.05em;
+  color: var(--color-soft-grey);
+  line-height: 0.92;
+}
+
+.shop-header-desc {
+  font-family: var(--font-editorial);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+.shop-body-container {
+  padding-top: 32px;
+}
+
+/* Category Pills */
+.category-pills-bar {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+}
+
+.cat-pill-btn {
+  white-space: nowrap;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  transition: all var(--transition-fast);
+}
+
+.cat-pill-btn:hover {
+  border-color: var(--border-medium);
+  color: var(--color-soft-grey);
+}
+
+.cat-pill-btn.active {
+  background-color: var(--color-soft-grey);
+  color: var(--color-almost-black);
+  border-color: var(--color-soft-grey);
+}
+
+/* Controls Bar */
+.shop-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-hairline);
+  margin-bottom: 32px;
+}
+
+.controls-left,
+.controls-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.filter-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-hairline);
+  padding: 8px 16px;
+  color: var(--color-soft-grey);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  transition: all var(--transition-fast);
+}
+
+.filter-toggle-btn:hover,
+.filter-toggle-btn.has-filters {
+  border-color: var(--color-burnt-red);
+  color: #fff;
+}
+
+.filter-count-badge {
+  background-color: var(--color-burnt-red);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+.reset-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background: transparent;
+  transition: color var(--transition-fast);
+}
+
+.reset-filter-btn:hover {
+  color: var(--color-burnt-red);
+}
+
+.product-count-readout {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.sort-dropdown-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border-hairline);
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.sort-icon {
+  color: var(--text-muted);
+}
+
+.sort-select {
+  background: transparent;
+  border: none;
+  color: var(--color-soft-grey);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.sort-select option {
+  background-color: #191919;
+  color: #fff;
+}
+
+/* Collapsible Filter Panel */
+.filter-drawer-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-hairline);
+  margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  .filter-drawer-panel {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter-group-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.filter-size-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.size-chip {
+  padding: 6px 14px;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-hairline);
+  color: var(--color-soft-grey);
+  transition: all var(--transition-fast);
+}
+
+.size-chip.active {
+  background-color: var(--color-burnt-red);
+  border-color: var(--color-burnt-red);
+  color: #fff;
+}
+
+.price-slider {
+  accent-color: var(--color-burnt-red);
+  cursor: pointer;
+}
+
+.shop-no-results {
+  text-align: center;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.no-res-icon {
+  color: var(--text-muted);
+}

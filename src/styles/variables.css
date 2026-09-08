@@ -1,0 +1,80 @@
+/* ============================================================
+   DON STREETWEAR — OFFICIAL DESIGN SYSTEM TOKENS
+   Strict adherence to brand guide:
+   1. Almost Black: #191919 (40-45%)
+   2. Deep Teal: #042A2B (20-25%)
+   3. Soft Grey: #EAEAEA (15-20%)
+   4. Olive Green: #65743A (8-10%)
+   5. Burnt Red: #A72608 (5% - attention/urgency)
+   ============================================================ */
+
+:root {
+  /* Brand Official Palette */
+  --color-almost-black: #191919;
+  --color-deep-teal: #042A2B;
+  --color-soft-grey: #EAEAEA;
+  --color-olive-green: #65743A;
+  --color-burnt-red: #A72608;
+
+  /* Surface & Background Variants */
+  --bg-primary: #191919;
+  --bg-surface: #222222;
+  --bg-surface-elevated: #2a2a2a;
+  --bg-teal-section: #042A2B;
+  --bg-light-section: #EAEAEA;
+  --bg-olive-section: #65743A;
+  --bg-alert: #A72608;
+
+  /* Text & Foreground Variants */
+  --text-primary: #EAEAEA;
+  --text-secondary: rgba(234, 234, 234, 0.72);
+  --text-muted: rgba(234, 234, 234, 0.48);
+  --text-dark: #191919;
+  --text-dark-secondary: rgba(25, 25, 25, 0.75);
+  --text-red: #A72608;
+
+  /* Borders & Hairlines */
+  --border-hairline: rgba(234, 234, 234, 0.12);
+  --border-medium: rgba(234, 234, 234, 0.24);
+  --border-dark: rgba(25, 25, 25, 0.16);
+  --border-red: rgba(167, 38, 8, 0.4);
+
+  /* Typography System */
+  --font-heading: 'Bebas Neue', Impact, -apple-system, sans-serif;
+  --font-artistic: 'Climate Crisis', 'Bebas Neue', Impact, sans-serif;
+  --font-editorial: 'Vollkorn', Georgia, serif;
+  --font-mono: 'Courier New', Courier, monospace;
+
+  /* Spacing Scale (4, 8, 12, 16, 24, 32, 48, 64, 96, 128) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* Layout Max-Widths */
+  --container-max: 1520px;
+  --container-editorial: 1180px;
+  --container-reading: 780px;
+
+  /* Border Radii: Editorial minimal (0px - 4px) */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+
+  /* Transitions */
+  --transition-fast: 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-cinematic: 450ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Z-indices */
+  --z-header: 100;
+  --z-drawer: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+}

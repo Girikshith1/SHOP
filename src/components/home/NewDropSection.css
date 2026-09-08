@@ -1,0 +1,78 @@
+.new-drop-section {
+  padding-top: clamp(64px, 8vw, 120px);
+  padding-bottom: clamp(64px, 8vw, 120px);
+  background-color: var(--color-soft-grey);
+  color: var(--color-almost-black);
+}
+
+.newdrop-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: clamp(36px, 5vw, 64px);
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(25, 25, 25, 0.15);
+}
+
+.newdrop-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drop-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(25, 25, 25, 0.08);
+  padding: 4px 10px;
+  width: fit-content;
+  border-radius: var(--radius-xs);
+}
+
+.drop-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-burnt-red);
+}
+
+.drop-pill-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--color-almost-black);
+}
+
+.newdrop-main-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.6rem, 6vw, 5.2rem);
+  letter-spacing: 0.05em;
+  line-height: 0.92;
+  color: var(--color-almost-black);
+}
+
+.title-slash {
+  color: rgba(25, 25, 25, 0.3);
+}
+
+.drop-highlight {
+  color: var(--color-burnt-red);
+}
+
+.newdrop-subtitle {
+  font-family: var(--font-editorial);
+  font-size: 1.05rem;
+  color: rgba(25, 25, 25, 0.75);
+  max-width: 540px;
+}
+
+.newdrop-btn {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .newdrop-btn {
+    display: inline-flex;
+  }
+}
