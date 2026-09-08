@@ -104,9 +104,28 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
           <p className="footer-copyright">
             © {new Date().getFullYear()} {BRAND.name} STUDIO. ALL RIGHTS RESERVED.
           </p>
-          <p className="footer-tagline">
-            {BRAND.tagline}
-          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+            <p className="footer-tagline">
+              {BRAND.tagline}
+            </p>
+            <a
+              href="/admin"
+              onClick={(e) => handleLinkClick(e, '/admin')}
+              style={{
+                fontFamily: 'monospace',
+                fontSize: '0.7rem',
+                color: 'rgba(255,255,255,0.4)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                padding: '0.2rem 0.6rem',
+                borderRadius: '2px',
+                textDecoration: 'none',
+                letterSpacing: '0.08em',
+              }}
+              title="Enter Admin Command Center"
+            >
+              [HQ PORTAL]
+            </a>
+          </div>
         </div>
       </div>
     </footer>

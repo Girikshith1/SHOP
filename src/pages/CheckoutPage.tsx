@@ -3,6 +3,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { BRAND } from '../config/brand';
 import { ShippingAddress, PaymentMethod, Order } from '../types/order';
+import { ordersApi } from '../api/client';
 import {
   ShieldCheck,
   CheckCircle2,
@@ -55,31 +56,35 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ navigate }) => {
     setStep('payment');
   };
 
-  const handlePaymentSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
 
-    const orderNumber = `DON-2026-${Math.floor(1000 + Math.random() * 9000)}`;
-    const newOrder: Order = {
-      id: `ord-${Date.now()}`,
-      orderNumber,
-      createdAt: new Date().toISOString(),
-      status: 'confirmed',
-      trackingNumber: `BLUEDART-${Math.floor(10000000 + Math.random() * 90000000)}`,
-      carrier: 'BlueDart Air Express',
-      items: [...cart],
-      subtotal,
-      discount,
-      shippingFee,
-      total,
-      shippingAddress: address,
-      paymentMethod,
-      paymentStatus: 'paid',
-    };
+    setIsSubmitting(true);
+    try {
+      const orderPayload: Partial<Order> = {
+        items: [...cart],
+        subtotal,
+        discount,
+        shippingFee,
+        total,
+        shippingAddress: address,
+        paymentMethod,
+        paymentStatus: 'paid',
+      };
 
-    addOrder(newOrder);
-    setCompletedOrder(newOrder);
-    clearCart();
-    setStep('confirmation');
+      const createdOrder = await ordersApi.create(orderPayload);
+      addOrder(createdOrder);
+      setCompletedOrder(createdOrder);
+      clearCart();
+      setStep('confirmation');
+    } catch (err) {
+      console.error('Order creation error:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (cart.length === 0 && step !== 'confirmation') {

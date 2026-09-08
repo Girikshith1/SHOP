@@ -37,6 +37,7 @@ import { FAQPage } from './pages/FAQPage';
 import { ShippingReturnsPage } from './pages/ShippingReturnsPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsConditionsPage } from './pages/TermsConditionsPage';
+import { AdminPage } from './pages/AdminPage';
 
 import { Product } from './types/product';
 
@@ -198,6 +199,11 @@ export const AppContent: React.FC = () => {
       return <TermsConditionsPage navigate={navigate} />;
     }
 
+    // 22. Admin Command Center
+    if (currentPath === '/admin' || currentPath.startsWith('/admin')) {
+      return <AdminPage navigate={navigate} />;
+    }
+
     // Fallback: 404
     return (
       <div className="section container" style={{ textAlign: 'center', padding: '120px 20px' }}>
@@ -213,6 +219,7 @@ export const AppContent: React.FC = () => {
   };
 
   const isCheckout = currentPath === '/checkout';
+  const isAdmin = currentPath === '/admin' || currentPath.startsWith('/admin');
 
   return (
     <div className="app-wrapper">
@@ -254,8 +261,8 @@ export const AppContent: React.FC = () => {
         onClose={() => setIsSizeGuideOpen(false)}
       />
 
-      {/* Header & Announcements (hidden on distraction-free checkout) */}
-      {!isCheckout && (
+      {/* Header & Announcements (hidden on distraction-free checkout & admin portal) */}
+      {!isCheckout && !isAdmin && (
         <>
           <AnnouncementBar />
           <Header
@@ -272,8 +279,8 @@ export const AppContent: React.FC = () => {
         {renderRoute()}
       </main>
 
-      {/* Footer (hidden on distraction-free checkout) */}
-      {!isCheckout && <Footer navigate={navigate} />}
+      {/* Footer (hidden on distraction-free checkout & admin portal) */}
+      {!isCheckout && !isAdmin && <Footer navigate={navigate} />}
     </div>
   );
 };

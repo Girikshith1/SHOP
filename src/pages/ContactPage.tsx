@@ -8,6 +8,8 @@ interface ContactPageProps {
   navigate: (path: string) => void;
 }
 
+import { contactApi } from '../api/client';
+
 export const ContactPage: React.FC<ContactPageProps> = () => {
   const { showToast } = useToast();
   const [submitted, setSubmitted] = useState(false);
@@ -18,8 +20,13 @@ export const ContactPage: React.FC<ContactPageProps> = () => {
     message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      await contactApi.submit(formData);
+    } catch {
+      // Offline fallback
+    }
     setSubmitted(true);
     showToast('MESSAGE DISPATCHED', 'Streetwear concierge will respond within 4 hours', 'success');
   };

@@ -18,6 +18,7 @@ export interface Order {
   id: string;
   orderNumber: string;
   createdAt: string;
+  guestEmail?: string;
   status: 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
   trackingNumber: string;
   carrier: string;

@@ -1,16 +1,17 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { UserProfile, Order, ShippingAddress } from '../types/order';
 import { useToast } from './ToastContext';
+import { authApi, ordersApi } from '../api/client';
 
 interface AuthContextType {
   user: UserProfile | null;
   isAuthenticated: boolean;
   orders: Order[];
-  login: (email: string, name?: string) => void;
-  register: (name: string, email: string) => void;
+  login: (email: string, passwordOrName?: string, maybeName?: string) => Promise<void> | void;
+  register: (name: string, email: string, password?: string) => Promise<void> | void;
   logout: () => void;
   addOrder: (order: Order) => void;
-  updateAddress: (address: ShippingAddress) => void;
+  updateAddress: (address: ShippingAddress) => Promise<void> | void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -18,34 +19,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 const USER_STORAGE_KEY = 'don_streetwear_user';
 const ORDERS_STORAGE_KEY = 'don_streetwear_orders';
 
-const DEFAULT_ORDERS: Order[] = [
-  {
-    id: 'ord-8831',
-    orderNumber: 'DON-2026-8831',
-    createdAt: '2026-03-01T14:20:00Z',
-    status: 'delivered',
-    trackingNumber: 'BLUEDART-88219318',
-    carrier: 'BlueDart Air Express',
-    items: [],
-    subtotal: 5498,
-    discount: 0,
-    shippingFee: 0,
-    total: 5498,
-    shippingAddress: {
-      fullName: 'Aarav Sharma',
-      phone: '+91 98200 88310',
-      email: 'aarav.sharma@example.com',
-      addressLine1: 'Flat 402, Highline Residency',
-      addressLine2: 'Bandra West',
-      city: 'Mumbai',
-      state: 'Maharashtra',
-      pincode: '400050',
-      country: 'India',
-    },
-    paymentMethod: 'upi',
-    paymentStatus: 'paid',
-  },
-];
+const DEFAULT_ORDERS: Order[] = [];
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { showToast } = useToast();
@@ -90,6 +64,28 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   });
 
+  // Sync with backend on mount
+  useEffect(() => {
+    const syncBackend = async () => {
+      const token = authApi.getToken();
+      if (token) {
+        try {
+          const profile = await authApi.getMe();
+          if (profile?.user) {
+            setUser(profile.user);
+          }
+          const remoteOrders = await ordersApi.getMyOrders();
+          if (remoteOrders && remoteOrders.length > 0) {
+            setOrders(remoteOrders);
+          }
+        } catch {
+          // Keep local fallback
+        }
+      }
+    };
+    syncBackend();
+  }, []);
+
   useEffect(() => {
     if (user) {
       localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
@@ -102,10 +98,25 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders));
   }, [orders]);
 
-  const login = (email: string, name?: string) => {
+  const login = async (email: string, passwordOrName?: string, maybeName?: string) => {
+    try {
+      const res = await authApi.login(email, passwordOrName || 'streetwear123');
+      if (res?.user) {
+        setUser(res.user);
+        showToast('AUTHENTICATED', `Welcome back, ${res.user.name}`, 'success');
+        const remoteOrders = await ordersApi.getMyOrders();
+        if (remoteOrders && remoteOrders.length > 0) {
+          setOrders(remoteOrders);
+        }
+        return;
+      }
+    } catch {
+      // Offline fallback
+    }
+
     const newUser: UserProfile = {
       id: `usr-${Date.now()}`,
-      name: name || email.split('@')[0].toUpperCase(),
+      name: maybeName || passwordOrName || email.split('@')[0].toUpperCase(),
       email,
       memberTier: 'INNER CIRCLE',
       joinedDate: new Date().toISOString().split('T')[0],
@@ -115,7 +126,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     showToast('AUTHENTICATED', `Welcome back, ${newUser.name}`, 'success');
   };
 
-  const register = (name: string, email: string) => {
+  const register = async (name: string, email: string, password?: string) => {
+    try {
+      const res = await authApi.register(name, email, password || 'streetwear123');
+      if (res?.user) {
+        setUser(res.user);
+        showToast('WELCOME TO INNER CIRCLE', 'Account registered with VIP access', 'success');
+        return;
+      }
+    } catch {
+      // Offline fallback
+    }
+
     const newUser: UserProfile = {
       id: `usr-${Date.now()}`,
       name,
@@ -129,6 +151,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   const logout = () => {
+    authApi.logout();
     setUser(null);
     showToast('SIGNED OUT', 'Session terminated', 'info');
   };
@@ -137,8 +160,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setOrders((prev) => [order, ...prev]);
   };
 
-  const updateAddress = (address: ShippingAddress) => {
+  const updateAddress = async (address: ShippingAddress) => {
     if (!user) return;
+    try {
+      const res = await authApi.updateAddress(address);
+      if (res?.user) {
+        setUser(res.user);
+        return;
+      }
+    } catch {
+      // Offline fallback
+    }
+
     setUser((prev) =>
       prev
         ? {
