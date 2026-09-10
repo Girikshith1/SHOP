@@ -208,7 +208,20 @@ export const ordersApi = {
         method: 'POST',
         body: JSON.stringify(orderData),
       });
-      return res.order;
+      if (res.order) {
+        try {
+          const existingStr = localStorage.getItem('don_streetwear_orders');
+          const existing: Order[] = existingStr ? JSON.parse(existingStr) : [];
+          if (!existing.some((o) => o.id === res.order.id || o.orderNumber === res.order.orderNumber)) {
+            existing.unshift(res.order);
+            localStorage.setItem('don_streetwear_orders', JSON.stringify(existing));
+          }
+        } catch {
+          // Ignore localStorage error
+        }
+        return res.order;
+      }
+      throw new Error('No order returned from backend');
     } catch (err) {
       console.warn('[API] Failed to save order to backend, generating local order fallback:', err);
       const fallbackOrder: Order = {
@@ -227,6 +240,14 @@ export const ordersApi = {
         paymentMethod: orderData.paymentMethod || 'upi',
         paymentStatus: 'paid',
       };
+      try {
+        const existingStr = localStorage.getItem('don_streetwear_orders');
+        const existing: Order[] = existingStr ? JSON.parse(existingStr) : [];
+        existing.unshift(fallbackOrder);
+        localStorage.setItem('don_streetwear_orders', JSON.stringify(existing));
+      } catch {
+        // Ignore localStorage error
+      }
       return fallbackOrder;
     }
   },

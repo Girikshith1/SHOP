@@ -37,14 +37,20 @@ export const connectDB = async (): Promise<void> => {
     if ((mongoose.connection.readyState as number) === 1) return;
   }
 
-  const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/don_streetwear';
-  const maskedUri = uri.replace(/:([^@:]+)@/, ':****@');
+  const uri = process.env.MONGODB_URI;
+  if (!uri && process.env.VERCEL) {
+    console.warn('[MongoDB] MONGODB_URI environment variable is missing on Vercel deployment. Operating in server fallback store mode.');
+    return;
+  }
+
+  const connectionUri = uri || 'mongodb://127.0.0.1:27017/don_streetwear';
+  const maskedUri = connectionUri.replace(/:([^@:]+)@/, ':****@');
   console.log(`[MongoDB] Attempting connection to: ${maskedUri}`);
 
   isConnecting = true;
   try {
-    const conn = await mongoose.connect(uri, {
-      serverSelectionTimeoutMS: 8000,
+    const conn = await mongoose.connect(connectionUri, {
+      serverSelectionTimeoutMS: 3000,
     });
     console.log(`[MongoDB] Connected successfully: ${conn.connection.host}/${conn.connection.name}`);
   } catch (error) {
