@@ -65,8 +65,14 @@ apiRouter.use('/collections', collectionRoutes);
 apiRouter.use('/contact', contactRoutes);
 apiRouter.use('/admin', adminRoutes);
 
-// Mount router on both /api and / so it seamlessly supports both direct and rewritten paths
+// Mount router on /api, /, and direct routes to guarantee matching regardless of Vercel path rewriting
 app.use('/api', apiRouter);
+app.use('/auth', authRoutes);
+app.use('/products', productRoutes);
+app.use('/orders', orderRoutes);
+app.use('/collections', collectionRoutes);
+app.use('/contact', contactRoutes);
+app.use('/admin', adminRoutes);
 app.use('/', apiRouter);
 
 // Global Error Handler
