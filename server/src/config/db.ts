@@ -21,20 +21,15 @@ try {
 }
 dotenv.config();
 
-let isConnecting = false;
+let cachedPromise: Promise<void> | null = null;
 
 export const connectDB = async (): Promise<void> => {
   if ((mongoose.connection.readyState as number) === 1) {
     return;
   }
 
-  if ((mongoose.connection.readyState as number) === 2 || isConnecting) {
-    let attempts = 0;
-    while ((mongoose.connection.readyState as number) === 2 && attempts < 20) {
-      await new Promise((r) => setTimeout(r, 100));
-      attempts++;
-    }
-    if ((mongoose.connection.readyState as number) === 1) return;
+  if (cachedPromise) {
+    return cachedPromise;
   }
 
   const uri = process.env.MONGODB_URI;
@@ -47,20 +42,23 @@ export const connectDB = async (): Promise<void> => {
   const maskedUri = connectionUri.replace(/:([^@:]+)@/, ':****@');
   console.log(`[MongoDB] Attempting connection to: ${maskedUri}`);
 
-  isConnecting = true;
-  try {
-    const conn = await mongoose.connect(connectionUri, {
-      serverSelectionTimeoutMS: 3000,
-    });
-    console.log(`[MongoDB] Connected successfully: ${conn.connection.host}/${conn.connection.name}`);
-  } catch (error) {
-    console.error(`[MongoDB] Connection error:`, error);
-    if (process.env.NODE_ENV === 'production' && !process.env.VERCEL) {
-      process.exit(1);
+  cachedPromise = (async () => {
+    try {
+      const conn = await mongoose.connect(connectionUri, {
+        serverSelectionTimeoutMS: 2000,
+        maxPoolSize: 10,
+      });
+      console.log(`[MongoDB] Connected successfully: ${conn.connection.host}/${conn.connection.name}`);
+    } catch (error) {
+      console.error(`[MongoDB] Connection error:`, error);
+      cachedPromise = null;
+      if (process.env.NODE_ENV === 'production' && !process.env.VERCEL) {
+        process.exit(1);
+      }
     }
-  } finally {
-    isConnecting = false;
-  }
+  })();
+
+  return cachedPromise;
 };
 
 mongoose.connection.on('disconnected', () => {

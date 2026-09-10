@@ -12,9 +12,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ navigate }) => {
       {/* Background Cinematic Visual with Dark Gradient Vignette */}
       <div className="hero-backdrop-media">
         <img
-          src="https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=2000&q=88"
+          src="https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1600&q=80"
           alt="DON Streetwear Campaign Editorial"
           className="hero-img"
+          decoding="async"
         />
         <div className="hero-vignette-overlay"></div>
       </div>

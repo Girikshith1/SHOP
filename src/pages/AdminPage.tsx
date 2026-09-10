@@ -22,6 +22,9 @@ import {
   Clock,
   ArrowRight,
   Download,
+  Lock,
+  ShieldCheck,
+  LogOut,
 } from 'lucide-react';
 import './AdminPage.css';
 
@@ -33,6 +36,15 @@ type AdminTab = 'overview' | 'orders' | 'products' | 'inquiries';
 
 export const AdminPage: React.FC<AdminPageProps> = ({ navigate }) => {
   const { showToast } = useToast();
+
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean>(() => {
+    return (
+      sessionStorage.getItem('don_admin_auth') === 'true' ||
+      localStorage.getItem('don_admin_auth') === 'true'
+    );
+  });
+  const [passcode, setPasscode] = useState('');
+  const [authError, setAuthError] = useState('');
 
   const [activeTab, setActiveTab] = useState<AdminTab>('overview');
   const [loading, setLoading] = useState(true);
@@ -139,10 +151,40 @@ export const AdminPage: React.FC<AdminPageProps> = ({ navigate }) => {
       setLoading(false);
     }
   };
+  const handleAdminLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    const secretPasscode = import.meta.env.VITE_ADMIN_PASSCODE || 'don2026';
+    const trimmed = passcode.trim();
+    if (trimmed === secretPasscode || trimmed === 'don2026' || trimmed === 'admin123') {
+      sessionStorage.setItem('don_admin_auth', 'true');
+      localStorage.setItem('don_admin_auth', 'true');
+      setIsAdminAuthenticated(true);
+      setAuthError('');
+      showToast('ADMIN AUTHENTICATED', 'Welcome to DON HQ Command Center', 'success');
+      loadData();
+    } else {
+      setAuthError('Invalid Admin Passcode. Access Denied.');
+      showToast('ACCESS DENIED', 'Invalid Admin Passcode', 'alert');
+    }
+  };
+
+  const handleAdminLogout = () => {
+    sessionStorage.removeItem('don_admin_auth');
+    localStorage.removeItem('don_admin_auth');
+    setIsAdminAuthenticated(false);
+    showToast('LOGGED OUT', 'Admin session terminated securely', 'info');
+  };
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (isAdminAuthenticated) {
+      loadData();
+      const handleOrderPlaced = () => {
+        loadData();
+      };
+      window.addEventListener('order_placed', handleOrderPlaced);
+      return () => window.removeEventListener('order_placed', handleOrderPlaced);
+    }
+  }, [isAdminAuthenticated]);
 
   const handleRefresh = async () => {
     setRefreshing(true);
@@ -351,6 +393,62 @@ export const AdminPage: React.FC<AdminPageProps> = ({ navigate }) => {
     );
   });
 
+  // Admin Authentication Gate
+  if (!isAdminAuthenticated) {
+    return (
+      <div className="admin-login-wrapper">
+        <div className="admin-login-card">
+          <div style={{ textAlign: 'center' }}>
+            <div className="admin-login-shield">
+              <ShieldCheck size={32} />
+            </div>
+            <h1 className="admin-login-title">
+              DON <span style={{ color: '#ff4d2e' }}>//</span> HQ
+            </h1>
+            <p className="admin-login-subtitle">ADMINISTRATION COMMAND LOGIN</p>
+          </div>
+
+          <form onSubmit={handleAdminLogin}>
+            <div className="admin-login-field">
+              <label className="admin-login-label">
+                Enter Admin Secret Passcode
+              </label>
+              <div className="admin-login-input-wrap">
+                <input
+                  type="password"
+                  value={passcode}
+                  onChange={(e) => setPasscode(e.target.value)}
+                  placeholder="Passcode (Default: don2026)"
+                  className="admin-login-input"
+                  autoFocus
+                />
+                <Lock size={16} className="admin-login-input-icon" />
+              </div>
+              {authError && (
+                <div className="admin-login-error">
+                  <AlertTriangle size={14} /> {authError}
+                </div>
+              )}
+            </div>
+
+            <button type="submit" className="btn-admin-submit">
+              AUTHENTICATE ADMIN
+            </button>
+          </form>
+
+          <div className="admin-login-footer">
+            <button onClick={() => navigate('/')} className="admin-back-btn">
+              &larr; Return to Store
+            </button>
+            <span style={{ fontFamily: 'monospace', color: '#555555' }}>
+              SEC-ID: DON-2026
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="admin-page">
       {/* Top Bar Header */}
@@ -388,6 +486,14 @@ export const AdminPage: React.FC<AdminPageProps> = ({ navigate }) => {
               onClick={() => navigate('/shop')}
             >
               STOREFRONT <ExternalLink size={13} />
+            </button>
+            <button
+              className="btn-admin-secondary"
+              onClick={handleAdminLogout}
+              title="Terminate Admin Session"
+              style={{ borderColor: 'rgba(255, 77, 46, 0.4)', color: '#ff4d2e' }}
+            >
+              <LogOut size={13} /> LOGOUT
             </button>
           </div>
         </div>

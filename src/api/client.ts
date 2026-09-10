@@ -219,6 +219,7 @@ export const ordersApi = {
         } catch {
           // Ignore localStorage error
         }
+        window.dispatchEvent(new Event('order_placed'));
         return res.order;
       }
       throw new Error('No order returned from backend');
@@ -248,6 +249,7 @@ export const ordersApi = {
       } catch {
         // Ignore localStorage error
       }
+      window.dispatchEvent(new Event('order_placed'));
       return fallbackOrder;
     }
   },
